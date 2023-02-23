@@ -1,3 +1,4 @@
 ## Obj-C
 *.dSYM.zip
 *.dSYM
+*.exec
