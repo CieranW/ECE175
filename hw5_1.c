@@ -2,7 +2,7 @@
 #include <stdbool.h>
 
 int DaysInFeb(int userYear)
-{
+{ // O(log(n))
     if (userYear % 4 != 0)
     {
         return 28;
