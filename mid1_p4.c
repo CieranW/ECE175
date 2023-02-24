@@ -2,9 +2,11 @@
 
 int main(void)
 {
-    float loan, payment, interest;
+    double loan, payment, interest, newBalance;
 
-    scanf("%f %f %f", &loan, &payment, &interest);
+    scanf("%lf %lf %lf", &loan, &payment, &interest);
+
+    newBalance = (loan * interest) + loan;
 
     return 0;
 }
