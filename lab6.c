@@ -38,12 +38,19 @@ int main()
 
     // Problem 2
     int quarter, dime, nickel, penny, dollars, cents;
+    char yesOrNo = 'y';
 
-    printf("Enter coins info (Quarter, Dime, Nickel, Penny): \n");
-    scanf("%d %d %d %d", &quarter, &dime, &nickel, &penny);
+    while (yesOrNo == 'y')
+    {
+        printf("Enter coins info (Quarter, Dime, Nickel, Penny): \n");
+        scanf("%d %d %d %d", &quarter, &dime, &nickel, &penny);
 
-    Credit(quarter, dime, nickel, penny, &dollars, &cents);
+        Credit(quarter, dime, nickel, penny, &dollars, &cents);
+        printf("Coin Credit:\nDollars: %d\nChange: %d cents\n", dollars, cents);
 
-    printf("Coin Credit:\nDollars: %d\nChange: %d cents\n", dollars, cents);
+        printf("Do you want to continue (y or n)? ");
+        scanf(" %c", &yesOrNo);
+    }
+
     return 0;
 }
