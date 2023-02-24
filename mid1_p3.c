@@ -7,9 +7,9 @@ int main()
     scanf("%d", &userNum);
     if (userNum != 1)
     {
-        printf("%d\n", userNum);
         while (userNum != 1)
         {
+            printf("%d\t", userNum);
             if (userNum % 2 == 0)
             {
                 userNum /= 2;
@@ -18,14 +18,12 @@ int main()
             {
                 userNum = (userNum * 3) + 1;
             }
-            printf("%d\t", userNum);
+        }
+        if (userNum == 1)
+        {
+            printf("%d\n", userNum);
         }
     }
-    else
-    {
-        printf("%d", userNum);
-    }
 
-    printf("\n");
     return 0;
 }
