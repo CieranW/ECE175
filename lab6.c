@@ -6,7 +6,7 @@ int SumInts(int target)
     inp = fopen("MyDataF.dat", "r");
     int finalSum = 0, n;
 
-    while (!feof(inp))
+    while (!feof(inp)) // O(n^2)
     {
         fscanf(inp, "%d", &n);
         if (n >= target)
@@ -20,7 +20,7 @@ int SumInts(int target)
 }
 
 void Credit(int quarter, int dime, int nickel, int penny, int *dollars, int *cents)
-{
+{ // O(1)
     int totalCash = 0;
     totalCash = quarter * 25 + dime * 10 + nickel * 5 + penny;
     *dollars = totalCash / 100;
@@ -41,6 +41,8 @@ int main()
 
     printf("Enter coins info (Quarter, Dime, Nickel, Penny): \n");
     scanf("%d %d %d %d", &quarter, &dime, &nickel, &penny);
+
+    Credit(quarter, dime, nickel, penny, &dollars, &cents);
 
     printf("Coin Credit:\nDollars: %d\nChange: %d cents\n", dollars, cents);
     return 0;
