@@ -1,9 +1,10 @@
 #include <stdio.h>
 
-int SumInts(FILE *inp, int target)
+int SumInts(int target)
 {
+    FILE *inp;
     inp = fopen("MyDataF.dat", "r");
-    int finalSum, n;
+    int finalSum = 0, n;
 
     while (!feof(inp))
     {
@@ -13,4 +14,20 @@ int SumInts(FILE *inp, int target)
             finalSum += n;
         }
     }
+
+    fclose(inp);
+    return finalSum;
+}
+
+int main()
+{
+    // Problem 1
+    int targetValue;
+
+    printf("Find the sum of all values above what threshold?\n");
+    scanf("%d", &targetValue);
+
+    printf("The sum of all values >= %d was found to be %d\n", targetValue, SumInts(targetValue));
+
+    return 0;
 }
