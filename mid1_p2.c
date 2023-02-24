@@ -2,16 +2,16 @@
 
 int main()
 {
-    int max, min, userNum;
+    int max = 0, min = -1, userNum;
 
-    while (userNum > 0) // O(n^2)
+    while (userNum > -1) // O(n^2)
     {
         scanf("%d", &userNum);
-        if (userNum > max)
+        if (userNum >= max)
         {
             max = userNum;
         }
-        else if (userNum < min)
+        else if (userNum <= min)
         {
             min = userNum;
         }
