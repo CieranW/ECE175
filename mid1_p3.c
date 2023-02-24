@@ -19,11 +19,10 @@ int main()
                 userNum = (userNum * 3) + 1;
             }
         }
-        if (userNum == 1)
-        {
-            printf("%d\n", userNum);
-        }
     }
-
+    if (userNum == 1)
+    {
+        printf("%d\n", userNum);
+    }
     return 0;
 }
