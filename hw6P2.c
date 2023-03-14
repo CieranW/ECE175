@@ -19,7 +19,11 @@ int main(void)
 
 void smallestInt(FILE *inp, int *pmin1, int *pmin2)
 {
-    int num;
+    // Initializes the temp variable (num), and the two min values so that there isn't an error thrown during a unit test. If failed to initialise, a unit test would show that min1 and min2 would be 0 and 1 (I think).
+    int num = 0;
+    fscanf(inp, "%d", &num);
+    *pmin1 = num;
+    *pmin2 = num;
 
     while (!feof(inp))
     {
