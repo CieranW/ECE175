@@ -23,19 +23,108 @@ Letter e is not part of the secret word, you have 2 attempts left. … */
 #include <stdio.h>
 #include <stdbool.h>
 
-bool letterCheck(char x[], char y[], int len, char c, int *times);
+bool letterCheck(char word[], char guess[], int lengthOfWord, char userGuess, int *times);
 
-int main()
+int compareArray(char a[], char b[], int size);
+
+bool letterCheck(char a[], char guess[], int lengthOfWord, char userGuess, int *times)
 {
+    // checks if letter userGuess exists in word[]. Discovered letters are stored in guess[].
+    // times holds how many times userGuess appeared in word.
+    int i;
+    *times = 0;
+    for (i = 0; i < lengthOfWord; i++)
+    {
+        if (a[i] == userGuess)
+        {
+            guess[i] = userGuess;
+            *times += 1;
+        }
+    }
+    if (*times != 0)
+    {
+        //*times;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
-    /* Type your code here. */
-
+int compareArray(char a[], char b[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++)
+    {
+        if (a[i] != b[i])
+        {
+            return 1;
+        }
+    }
     return 0;
 }
 
-bool letterCheck(char x[], char y[], int len, char c, int *times)
+int main()
 {
-    // checks if letter c exists in x[]. Discovered letters are stored in y[].
-    // times holds how many
-    // times c appeared in x.
+    int lengthOfWord = 7, times, i, count = 4, compare = 1;
+    bool attempt;
+    char userGuess, guess[lengthOfWord];
+
+    char a[7] = {'a', 'b', 'a', 'n', 'd', 'o', 'n'}; // abandon
+    // char b[7] = {'i', 'n', 'f', 'e', 'r', 'n', 'o'}; // inferno
+    // char c[7] = {'a', 'n', 'n', 'o', 'y', 'e', 'd'}; // annoyed
+    // char d[7] = {'f', 'i', 'n', 'a', 'n', 'c', 'e'}; // finance
+    // char e[7] = {'a', 'e', 'r', 'o', 'b', 'i', 'c'}; // aerobic
+    // char f[7] = {'i', 'n', 'f', 'a', 'n', 'c', 'y'}; // infancy
+
+    for (i = 0; i < lengthOfWord; i++)
+    {
+        guess[i] = '*';
+    }
+
+    printf("Let's play hangman\n");
+    for (i = 0; i < lengthOfWord; i++)
+    {
+        printf("%c", guess[i]);
+    }
+    printf("\n");
+
+    while (count > 0 && compare == 1)
+    {
+        printf("Guess a letter: ");
+        scanf(" %c", &userGuess);
+        attempt = letterCheck(a, guess, lengthOfWord, userGuess, &times);
+        if (attempt == true)
+        {
+            printf("Letter %c exists %d times in the secret word. You have %d attemps left.\n", userGuess, times, count);
+            for (i = 0; i < lengthOfWord; i++)
+            {
+                printf("%c", guess[i]);
+            }
+            printf("\n");
+        }
+        else
+        {
+            count -= 1;
+            printf("Letter %c is not part of the word. You have %d guesses remaining.\n", userGuess, count);
+        }
+        compare = compareArray(a, guess, lengthOfWord);
+    }
+
+    if (count == 0)
+    {
+        printf("You have no attempts remaining. The secret word was:\n");
+        for (i = 0; i < lengthOfWord; i++)
+        {
+            printf("%c", a[i]);
+        }
+        printf("\n");
+    }
+    else if (compare == 0)
+    {
+        printf("Congratulations, you guessed the word correctly. You had %d attempts remaining.\n", count);
+    }
+
+    return 0;
 }
