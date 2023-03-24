@@ -65,12 +65,12 @@ void ReadArray(FILE *inp, int x[5][5])
     printf("Horizontal partiy: ");
     for (i = 0; i < 5; i++)
     {
-        printf("%d", hor[i]);
+        printf("%d\t", hor[i]);
     }
     printf("\nVertical partiy: ");
     for (i = 0; i < 5; i++)
     {
-        printf("%d", vert[i]);
+        printf("%d\t", vert[i]);
     }
     printf("\n");
 }
