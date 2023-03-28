@@ -14,6 +14,7 @@ int main(void)
 {
 
     int sudoku[SIZE][SIZE]; // sudoku is a two dimensional array that holds all the values of the board
+    bool check = false;
     FILE *inp;
 
     inp = fopen("sudoku1.txt", "r");
@@ -26,7 +27,17 @@ int main(void)
     {
         // your code goes here
         readSudoku(sudoku, inp);
-        printSudoku(sudoku);
+        check = checkSudoku(sudoku);
+
+        if (check == true)
+        {
+            printSudoku(sudoku);
+            return 0;
+        }
+        else
+        {
+            return -1;
+        }
     }
 }
 
@@ -67,4 +78,31 @@ void printSudoku(int x[][SIZE])
 
 bool checkSudoku(int x[][SIZE])
 { // returns true if x is a valid sudoku boards and false otherwise
+    int i, j, k, row[SIZE], col[SIZE], square[3][3];
+
+    // Assigns row and column variables from array x.
+    for (i = 0; i < SIZE; i++)
+    {
+        for (j = 0; j < SIZE; j++)
+        {
+            row[i] = x[i][j];
+            col[i] = x[j][i];
+        }
+    }
+    // Assigns square a section of the sudoku puzzle.
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            square[i][j] = x[i][j];
+        }
+    }
+
+    for (i = 0; i < SIZE; i++)
+    {
+        for (j = 0; j < SIZE; j++)
+        {
+            if ()
+        }
+    }
 }
