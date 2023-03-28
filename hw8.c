@@ -1,18 +1,14 @@
 /* Sudoku is a number-placement puzzle played on a 9-by-9 grid. The objective is to fill the grid with digits so that each column, each row, and each of the nine 3-by-3 subgrids that compose the grid contain all of the digits from 1 to 9. For complete Sudoku rules, check [Wikipedia]{http://en.wikipedia.org/wiki/Sudoku}.
 
-Write a program that reads a sudoku file as input and checks if the file is a proper solution to the Sudoku puzzle. Your program should use a function called checkBoard which returns true if the board is a valid sudoku board and zero otherwise.
-
-void readSudoku(int x[][9], FILE *inp); // reads a sudoku board from a file pointed by inp
-void printSudoku(int x[][9]); // prints a sudoku board in the format shown below
-bool checkSudoku(int x[][9]); // checks if this is a valid sudoku board and returns true or false */
+Write a program that reads a sudoku file as input and checks if the file is a proper solution to the Sudoku puzzle. Your program should use a function called checkBoard which returns true if the board is a valid sudoku board and zero otherwise.*/
 
 #include <stdio.h>
 #include <stdbool.h>
 #define SIZE 9
 
-void readSudoku(int x[][SIZE], FILE *inp);
-void printSudoku(int x[][SIZE]);
-bool checkSudoku(int x[][SIZE]);
+void readSudoku(int x[][SIZE], FILE *inp); // reads a sudoku board from a file pointed by inp
+void printSudoku(int x[][SIZE]);           // prints a sudoku board in the format shown below
+bool checkSudoku(int x[][SIZE]);           // checks if this is a valid sudoku board and returns true or false
 
 int main(void)
 {
@@ -29,15 +25,44 @@ int main(void)
     else
     {
         // your code goes here
+        readSudoku(sudoku, inp);
+        printSudoku(sudoku);
     }
 }
 
 void readSudoku(int x[][SIZE], FILE *inp)
 { // reads a sudoku file into array x
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            fscanf(inp, "%d", &x[i][j]);
+        }
+    }
 }
 
 void printSudoku(int x[][SIZE])
 { // prints a soduko board
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            printf("%d ", x[i][j]);
+            if (j == 2 || j == 5)
+            {
+                printf("| ");
+            }
+        }
+        printf("\n");
+        if (i == 2 || i == 5)
+        {
+            for (int k = 0; k < 21; k++)
+            {
+                printf("-");
+            }
+            printf("\n");
+        }
+    }
 }
 
 bool checkSudoku(int x[][SIZE])
