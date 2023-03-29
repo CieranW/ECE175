@@ -6,9 +6,10 @@ Write a program that reads a sudoku file as input and checks if the file is a pr
 #include <stdbool.h>
 #define SIZE 9
 
-void readSudoku(int x[][SIZE], FILE *inp); // reads a sudoku board from a file pointed by inp
-void printSudoku(int x[][SIZE]);           // prints a sudoku board in the format shown below
-bool checkSudoku(int x[][SIZE]);           // checks if this is a valid sudoku board and returns true or false
+void readSudoku(int x[][SIZE], FILE *inp);                            // reads a sudoku board from a file pointed by inp
+void printSudoku(int x[][SIZE]);                                      // prints a sudoku board in the format shown below
+bool checkSudoku(int x[][SIZE]);                                      // checks if this is a valid sudoku board and returns true or false
+void checkArray(int sudoku[SIZE][SIZE], int i, int j, int square[8]); // checks each square into a temp array to run through a check to see if it matches the necessary conditions
 
 int main(void)
 {
@@ -31,12 +32,14 @@ int main(void)
 
         if (check == true)
         {
-            printSudoku(sudoku);
+            printf("This is a valid sudoku puzzle\n");
+            // printSudoku(sudoku);
             return 0;
         }
         else
         {
-            return -1;
+            printf("This is not a valid sudoku puzzle\n");
+            return 0;
         }
     }
 }
@@ -77,32 +80,94 @@ void printSudoku(int x[][SIZE])
 }
 
 bool checkSudoku(int x[][SIZE])
-{ // returns true if x is a valid sudoku boards and false otherwise
-    int i, j, k, row[SIZE], col[SIZE], square[3][3];
+{
+    // returns true if x is a valid sudoku boards and false otherwise
+    int i, j, k, row[SIZE], col[SIZE], square[SIZE], temprow[SIZE], tempcol[SIZE], tempbox[9], counterRow, counterCol, counterBox, sudoku[SIZE][SIZE];
+    bool check1 = false, check2 = false;
 
-    // Assigns row and column variables from array x.
+    // Initializes the three comparison arrays to 0
     for (i = 0; i < SIZE; i++)
     {
+        row[i] = 0;
+        col[i] = 0;
+        square[i] = 0;
+        temprow[i] = 0;
+        tempcol[i] = 0;
+        tempbox[i] = 0;
         for (j = 0; j < SIZE; j++)
         {
-            row[i] = x[i][j];
-            col[i] = x[j][i];
+            sudoku[i][j] = x[i][j];
         }
     }
-    // Assigns square a section of the sudoku puzzle.
-    for (i = 0; i < 3; i++)
+    while (check1 == false || check2 == false)
     {
-        for (j = 0; j < 3; j++)
+        // Assigns row and column variables from array x.
+        for (i = 0; i < SIZE; i++)
         {
-            square[i][j] = x[i][j];
+            for (j = 0; j < SIZE; j++)
+            {
+                row[j] = x[i][j];
+                col[j] = x[j][i];
+            }
+            for (i = 0; i < 9; i++)
+            {
+                temprow[row[i] - 1] = 1;
+                tempcol[col[i] - 1] = 1;
+            }
+            counterRow = 0, counterCol = 0;
+            for (k = 0; k < 9; k++)
+            {
+                counterRow += temprow[k];
+                counterCol += tempcol[k];
+            }
+            if (counterRow == 9 && counterCol == 9)
+            {
+                check1 = true;
+            }
         }
-    }
+        // Assigns square a section of the sudoku puzzle.
+        for (int i = 0; i < 9; i += 3)
+        {
+            for (j = 0; j < 9; j += 3)
+            {
+                checkArray(sudoku, i, j, square);
+            }
+            for (i = 0; i < 9; i++)
+            {
+                tempbox[square[i] - 1] = 1;
+            }
+            counterBox = 0;
+            for (i = 0; i < 9; i++)
+            {
+                counterBox += tempbox[i];
+            }
+            if (counterBox == 9)
+            {
+                check2 = true;
+            }
+        }
 
-    for (i = 0; i < SIZE; i++)
-    {
-        for (j = 0; j < SIZE; j++)
+        if (check1 == true && check2 == true)
         {
-            if ()
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+void checkArray(int sudoku[SIZE][SIZE], int i, int j, int square[8])
+{
+    int l, m, k = 0;
+
+    for (l = i; l < i + 3; ++l)
+    {
+        for (m = j; m < j + 3; ++m)
+        {
+            square[k++] = sudoku[l][m];
         }
     }
 }
