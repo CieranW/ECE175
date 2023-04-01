@@ -18,7 +18,6 @@ bool WordReverse(char input[100])
         reversed[i] = input[len - i - 1];
         reversed[len - i - 1] = temp;
     }
-    printf("%s\t%s\n", input, reversed);
     if (strcmp(reversed, input) == 0)
     {
         return true;
@@ -48,6 +47,8 @@ int main()
             fprintf(out, "%s\n", input);
         }
     }
+    fclose(inp);
+    fclose(out);
 
     return 0;
 }
