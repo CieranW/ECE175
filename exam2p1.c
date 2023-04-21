@@ -37,7 +37,17 @@ bool symmetric(int data[], int size, float *pivot)
     // If the array is symmetric, finds the value where the data is mirrored
     if (symmetry == true)
     {
-        *pivot = (data[(size - 1) / 2] + data[((size - 1) / 2) + 1]) / 2;
+        int actual = (size - 1) / 2;
+        if (size % 2 == 0)
+        {
+
+            *pivot = (data[actual] + data[(actual) + 1]) / 2;
+        }
+        else
+        {
+
+            *pivot = (data[actual] + data[actual]) / 2;
+        }
     }
 
     return symmetry;
@@ -49,7 +59,6 @@ int main()
     char userFilename[50], comma[20];
     printf("Enter the name of the data file:\n");
     scanf("%s", userFilename);
-
     FILE *inp = fopen(userFilename, "r");
     int data[20], size = 0, i, j;
     float pivot;
