@@ -6,5 +6,9 @@ typedef struct card_s
     struct card_s *pointer;
 } card;
 
-void addCard(card *newCard);
-void removeCard(card *hand);
+void addCard(card *pointer, card **head, card **tail);
+void removeCard(card *pointer, card **head, card **tail);
+void printCard();
+void newDeck(FILE *input, card deck[]);
+void discardDeck();
+void shuffleDeck(card deck[]);
