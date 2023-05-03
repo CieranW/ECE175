@@ -36,7 +36,7 @@ void removeCard(card *pointer, card **head, card **tail, card cardChoice)
 {
     if (pointer == *head)
     {
-        *head = pointer->next
+        *head = pointer->next;
     }
     else
     {
@@ -45,7 +45,7 @@ void removeCard(card *pointer, card **head, card **tail, card cardChoice)
 
     if (pointer == *tail)
     {
-        *tail = p->previous;
+        *tail = pointer->previous;
     }
     else
     {
@@ -69,9 +69,10 @@ void shuffleDeck(card deck[])
     }
 }
 
-void printCard(card playerDeck, int handSize)
+void printCard(card *pointer, int handSize)
 {
     int i, comma[handSize - 1];
+    card temp;
 
     for (i = 0; i < handSize - 1; i++)
     {
@@ -79,14 +80,6 @@ void printCard(card playerDeck, int handSize)
     }
     for (i = 0; i < handSize; i++)
     {
-        if (deck.action[i] == 'none')
-        {
-            printf("%s %d%d", deck[i].colour, deck[i].number, comma[i]);
-        }
-        else
-        {
-            printf("%s %d %s%d", deck[i].colour, deck[i].number, deck[i].action, comma[i]);
-        }
     }
 }
 
@@ -96,6 +89,6 @@ void newDeck(FILE *inputFile, card deck[])
 
     for (i = 0; i < 108; i++)
     {
-        fscanf(inputFile, "%s%d%s%*c", deck[i].colour, deck[i].value, deck[i].action);
+        fscanf(inputFile, "%s%d%s%*c", deck[i].colour, &deck[i].value, deck[i].action);
     }
 }

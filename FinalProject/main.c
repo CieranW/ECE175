@@ -5,11 +5,11 @@
 
 int main(void)
 {
-    card player1[10], player2[10], deck[108];
+    card player1[20], player2[20], deck[108], discardPile[108], centerPile[5];
     int i;
     FILE *inputFile = fopen("cardsData.txt", "r");
 
-    newDeck(deck);
+    newDeck(inputFile, deck);
     shuffleDeck(deck);
 
     for (i = 0; i < 7; i++)
